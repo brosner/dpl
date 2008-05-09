@@ -1,0 +1,7 @@
+
+file fp = @/home/brian/dpl2/test;
+print fp;
+print @fp;
+print fp;
+print fp;
+print @fp;

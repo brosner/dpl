@@ -1,0 +1,6 @@
+
+use <simple>;
+
+string a = "brian";
+print a;
+print "rosner";
