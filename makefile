@@ -1,11 +1,11 @@
 
 # define building tools
 CC		= gcc
-LEXER		= flex
-YACC		= bison
+LEXER	= flex
+YACC	= bison
 
 # define paths
-ROOT		= /home/brian/dpl2
+ROOT	= /home/brian/dpl2
 BIN		= $(ROOT)/bin
 SRC		= $(ROOT)/src
 EXT		= $(SRC)/ext
