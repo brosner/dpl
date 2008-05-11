@@ -18,9 +18,9 @@
 char *empty_string = "";
 char *undefined_string = "\0";
 
-void valueCopy(dplVal *to,dplVal *from) {
+void valueCopy(dplVal *to, dplVal *from) {
 	if(from->isArray == TRUE) {
-		arrayValueCopy(to,from);
+		arrayValueCopy(to, from);
 	}
 	else {
 		to->type = from->type;
@@ -49,7 +49,7 @@ void valueCopy(dplVal *to,dplVal *from) {
 	}
 }
 
-void arrayValueCopy(dplVal *to,dplVal *from) {
+void arrayValueCopy(dplVal *to, dplVal *from) {
 #ifdef DEBUG
 	if(from == NULL) {
 		printf("from is null\n");
@@ -60,8 +60,8 @@ void arrayValueCopy(dplVal *to,dplVal *from) {
 	to->type = from->type;
 	to->isArray = TRUE;
 
-	if(dplHashCopy(&(to->value.array.elements),from->value.array.elements,DPLVAL_COPY,&tmp,sizeof(dplVal)) == FAILURE) {
-		dplError(DPL_CORE,"hash copied failed");
+	if(dplHashCopy(&(to->value.array.elements), from->value.array.elements, DPLVAL_COPY, &tmp, sizeof(dplVal)) == FAILURE) {
+		dplError(DPL_CORE, "hash copied failed");
 	}
 }
 

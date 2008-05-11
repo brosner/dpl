@@ -5,7 +5,7 @@ LEXER	= flex
 YACC	= bison
 
 # define paths
-ROOT	= /home/brian/dpl2
+ROOT	= /Users/brian/Development/dpl
 BIN		= $(ROOT)/bin
 SRC		= $(ROOT)/src
 EXT		= $(SRC)/ext

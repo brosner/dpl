@@ -29,7 +29,7 @@ int registerFunctions(functionEntry *functions) {
 			return FAILURE;
 		}
 
-		if(dplHashAddElement(&_global(fst),ptr->functionName,strlen(ptr->functionName) + 1,&function,sizeof(dplVal)) == FAILURE) {
+		if(dplHashAddElement(&_global(fst), ptr->functionName, strlen(ptr->functionName) + 1, &function, sizeof(dplVal)) == FAILURE) {
 			return FAILURE;
 		}
 
@@ -39,12 +39,12 @@ int registerFunctions(functionEntry *functions) {
 	return SUCCESS;
 }
 
-void getArgument(dplVal *result,dplVal *args,unsigned int i) {
+void getArgument(dplVal *result, dplVal *args, unsigned int i) {
 	dplVal *arg;
 
-	if(dplHashIndexFind(args->value.ht,i,(void **) &arg) == FAILURE) {
+	if(dplHashIndexFind(args->value.ht, i, (void **) &arg) == FAILURE) {
 		/* change to dplError later */
-		fprintf(stderr,"could not get argument\n");
+		fprintf(stderr, "could not get argument\n");
 	}
 	else {
 		*result = *arg;
@@ -52,40 +52,40 @@ void getArgument(dplVal *result,dplVal *args,unsigned int i) {
 	}
 }
 
-void getOneArgument(dplVal *result,dplVal *args) {
+void getOneArgument(dplVal *result, dplVal *args) {
 	/* validate number of args */
 	if(getNumArguments < 1) {
-		dplError(DPL_WARNINGL,"missing argument");
+		dplError(DPL_WARNINGL, "missing argument");
 		return;
 	}
 
 	/* fetch argument */
-	getArgument(result,args,0);
+	getArgument(result, args, 0);
 }
 
-void callInternalFunction(dplVal *returnValue,dplVal *name,dplVal *args) {
+void callInternalFunction(dplVal *returnValue, dplVal *name, dplVal *args) {
 	dplVal *function;
 
-	if(dplHashFind(&_global(fst),STR_VALUE(name),STR_LEN(name) + 1,(void **) &function) == FAILURE) {
-		dplError(DPL_WARNINGL,"call to undefined function: %s",STR_VALUE(name));
+	if(dplHashFind(&_global(fst), STR_VALUE(name), STR_LEN(name) + 1, (void **) &function) == FAILURE) {
+		dplError(DPL_WARNINGL, "call to undefined function: %s", STR_VALUE(name));
 	}
 	else {
-		function->value.function(returnValue,args);
+		function->value.function(returnValue, args);
 	}
 }
 
-void passArgument(dplVal *result,dplVal *arg,int init) {
+void passArgument(dplVal *result, dplVal *arg, int init) {
 	static int argCount = 0;
 
 	if(init == 1) {
 		result->value.ht = (HashTable *) malloc(sizeof(HashTable));
-		if(dplHashInit(result->value.ht,20,NULL) == FAILURE) {
-			dplError(DPL_CORE,"arg hash tbl failed init");
+		if(dplHashInit(result->value.ht, 20, NULL) == FAILURE) {
+			dplError(DPL_CORE, "arg hash tbl failed init");
 		}
 	}
 
-	if(dplHashAddIndexElement(result->value.ht,argCount,arg,sizeof(dplVal)) == FAILURE) {
-		dplError(DPL_CORE,"failed adding arguments");
+	if(dplHashAddIndexElement(result->value.ht, argCount, arg, sizeof(dplVal)) == FAILURE) {
+		dplError(DPL_CORE, "failed adding arguments");
 	}
 
 	argCount++;

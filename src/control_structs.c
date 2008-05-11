@@ -21,7 +21,7 @@
 
 void csIfStart(dplVal *expr) {
 	/* push current state on to css stack */
-	stackPush(&_global(css),&_global(execute),sizeof(int));
+	stackPush(&_global(css), &_global(execute), sizeof(int));
 
 	/* should this if execute? */
 	if(_global(execute)) {
@@ -42,7 +42,7 @@ void csIfEnd() {
 	int *execFlag;
 
 	/* restore last state and jump back */
-	stackPop(&_global(css),(void **) &execFlag);
+	stackPop(&_global(css), (void **) &execFlag);
 	_global(execute) = *execFlag;
 }
 

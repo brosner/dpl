@@ -27,12 +27,12 @@
 
 extern int registerFunctions(functionEntry *functions);
 
-extern void getArgument(dplVal *result,dplVal *args,unsigned int i);
+extern void getArgument(dplVal *result, dplVal *args, unsigned int i);
 #define getNumArguments args->value.ht->numElements
 
-extern void getOneArgument(dplVal *result,dplVal *args);
+extern void getOneArgument(dplVal *result, dplVal *args);
 
-extern void callInternalFunction(dplVal *returnValue,dplVal *name,dplVal *args);
-extern void passArgument(dplVal *result,dplVal *arg,int init);
+extern void callInternalFunction(dplVal *returnValue, dplVal *name, dplVal *args);
+extern void passArgument(dplVal *result, dplVal *arg, int init);
 
 #endif

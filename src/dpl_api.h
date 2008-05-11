@@ -31,10 +31,10 @@
 #define DPLVAL_DESTROY	(void (*)(void *)) dplValDestroy
 #define DPLVAL_COPY		(void (*)(void *)) dplValCopy
 
-extern void valueCopy(dplVal *to,dplVal *from);
-extern void arrayValueCopy(dplVal *to,dplVal *from);
+extern void valueCopy(dplVal *to, dplVal *from);
+extern void arrayValueCopy(dplVal *to, dplVal *from);
 extern void valuePrint(dplVal *value);
-extern void arrayValuePrint(dplVal *array,dplVal *element);
+extern void arrayValuePrint(dplVal *array, dplVal *element);
 extern void typePrint(dplVal *value);
 
 extern void dplValDestroy(dplVal *);

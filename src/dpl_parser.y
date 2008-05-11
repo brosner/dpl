@@ -35,7 +35,7 @@
 %{
 
 	void yyerror(const char *str) {
-		dplError(DPL_SYNTAX,"%s",yytext);
+		dplError(DPL_SYNTAX, "%s", yytext);
 	}
 	
 	int yywrap() {
@@ -115,18 +115,18 @@ declaration:
 ;
 
 type_declaration:
-		TYPE LABEL			{ if(_global(execute)) variableInit(&$1,&$2); }
-	|	TYPE LABEL '[' ']'	{ if(_global(execute)) arrayInit(&$1,&$2); }
+		TYPE LABEL			{ if(_global(execute)) variableInit(&$1, &$2); }
+	|	TYPE LABEL '[' ']'	{ if(_global(execute)) arrayInit(&$1, &$2); }
 ;
 
 type_value_declaration:
-		TYPE LABEL '=' expr				{ if(_global(execute)) variableCreate(&$1,&$2,&$4); }
-	|	TYPE LABEL '[' ']' '=' expr		{ if(_global(execute)) arrayCreate(&$1,&$2,&$6); }
+		TYPE LABEL '=' expr				{ if(_global(execute)) variableCreate(&$1, &$2, &$4); }
+	|	TYPE LABEL '[' ']' '=' expr		{ if(_global(execute)) arrayCreate(&$1, &$2, &$6); }
 ;
 
 value_declaration:
-		LABEL '=' expr				{ if(_global(execute)) variableAssign(&$1,&$3); }
-	|	LABEL '[' expr ']' '=' expr	{ if(_global(execute)) arrayAssign(&$1,&$3,&$6); }
+		LABEL '=' expr				{ if(_global(execute)) variableAssign(&$1, &$3); }
+	|	LABEL '[' expr ']' '=' expr	{ if(_global(execute)) arrayAssign(&$1, &$3, &$6); }
 ;
 
 construct:
@@ -139,44 +139,44 @@ construct:
 
 use_module:
 		USE_INTERNAL MODULE		{ dplLoadModule(&$2); }
-	|	USE_EXTERNAL MODULE		{ /*printf("using external module: %s\n",$2.value.str.val);*/ }
+	|	USE_EXTERNAL MODULE		{ /*printf("using external module: %s\n", $2.value.str.val);*/ }
 ;
 
 expr:
-		INT						{ if(_global(execute)) valueCopy(&$$,&$1); }
-	|	DOUBLE					{ if(_global(execute)) valueCopy(&$$,&$1); }
-	|	BOOLEAN					{ if(_global(execute)) valueCopy(&$$,&$1); }
-	|	'"' STRING '"'			{ if(_global(execute)) valueCopy(&$$,&$2); }
-	|	variable				{ if(_global(execute)) valueCopy(&$$,&$1); }
-	|	file_exprs				{ if(_global(execute)) valueCopy(&$$,&$1); }
-	|	function_call			{ if(_global(execute)) valueCopy(&$$,&$1); }
-	|	expr '+' expr			{ if(_global(execute)) opAdd(&$$,&$1,&$3); }
-	|	expr '-' expr			{ if(_global(execute)) opSub(&$$,&$1,&$3); }
-	|	expr '*' expr			{ if(_global(execute)) opMul(&$$,&$1,&$3); }
-	|	expr '/' expr			{ if(_global(execute)) opDiv(&$$,&$1,&$3); }
-	|	expr POW expr			{ if(_global(execute)) opPow(&$$,&$1,&$3); }
-	|	expr '.' expr			{ if(_global(execute)) opConcat(&$$,&$1,&$3); }
-	|	'(' expr ')'			{ if(_global(execute)) valueCopy(&$$,&$2); }
-	|	expr IS_EQUAL expr		{ if(_global(execute)) isEqualFunc(&$$,&$1,&$3); }
-	|	expr IS_NOT_EQUAL expr	{ if(_global(execute)) isNotEqualFunc(&$$,&$1,&$3); }
-	|	expr '>' expr			{ if(_global(execute)) isGreaterThanFunc(&$$,&$1,&$3); }
-	|	expr '<' expr			{ if(_global(execute)) isLessThanFunc(&$$,&$1,&$3); }
-	|	'[' array_values ']'	{ if(_global(execute)) arrayValueCopy(&$$,&$2); }
+		INT						{ if(_global(execute)) valueCopy(&$$, &$1); }
+	|	DOUBLE					{ if(_global(execute)) valueCopy(&$$, &$1); }
+	|	BOOLEAN					{ if(_global(execute)) valueCopy(&$$, &$1); }
+	|	'"' STRING '"'			{ if(_global(execute)) valueCopy(&$$, &$2); }
+	|	variable				{ if(_global(execute)) valueCopy(&$$, &$1); }
+	|	file_exprs				{ if(_global(execute)) valueCopy(&$$, &$1); }
+	|	function_call			{ if(_global(execute)) valueCopy(&$$, &$1); }
+	|	expr '+' expr			{ if(_global(execute)) opAdd(&$$, &$1, &$3); }
+	|	expr '-' expr			{ if(_global(execute)) opSub(&$$, &$1, &$3); }
+	|	expr '*' expr			{ if(_global(execute)) opMul(&$$, &$1, &$3); }
+	|	expr '/' expr			{ if(_global(execute)) opDiv(&$$, &$1, &$3); }
+	|	expr POW expr			{ if(_global(execute)) opPow(&$$, &$1, &$3); }
+	|	expr '.' expr			{ if(_global(execute)) opConcat(&$$, &$1, &$3); }
+	|	'(' expr ')'			{ if(_global(execute)) valueCopy(&$$, &$2); }
+	|	expr IS_EQUAL expr		{ if(_global(execute)) isEqualFunc(&$$, &$1, &$3); }
+	|	expr IS_NOT_EQUAL expr	{ if(_global(execute)) isNotEqualFunc(&$$, &$1, &$3); }
+	|	expr '>' expr			{ if(_global(execute)) isGreaterThanFunc(&$$, &$1, &$3); }
+	|	expr '<' expr			{ if(_global(execute)) isLessThanFunc(&$$, &$1, &$3); }
+	|	'[' array_values ']'	{ if(_global(execute)) arrayValueCopy(&$$, &$2); }
 ;
 
 variable:
-		LABEL				{ if(_global(execute)) variableFetch(&$$,&$1); }
-	|	LABEL '[' INT ']'	{ if(_global(execute)) arrayElementFetch(&$$,&$1,&$3); }
-	|	FILE_CONTENTS		{ if(_global(execute)) variableFetch(&$$,&$1); }
+		LABEL				{ if(_global(execute)) variableFetch(&$$, &$1); }
+	|	LABEL '[' INT ']'	{ if(_global(execute)) arrayElementFetch(&$$, &$1, &$3); }
+	|	FILE_CONTENTS		{ if(_global(execute)) variableFetch(&$$, &$1); }
 ;
 
 file_exprs:
-		'@' _FILE_PATH		{ if(_global(execute)) valueCopy(&$$,&$2); fileOpen(&$$,&$2); }
-	|	'@' variable		{ if(_global(execute)) $$.value.file.print_context = TRUE; valueCopy(&$$,&$2); fileRead(&$$); }
+		'@' _FILE_PATH		{ if(_global(execute)) valueCopy(&$$, &$2); fileOpen(&$$, &$2); }
+	|	'@' variable		{ if(_global(execute)) $$.value.file.print_context = TRUE; valueCopy(&$$, &$2); fileRead(&$$); }
 ;
 
 function_call:
-	LABEL '(' function_call_args ')'	{ if(_global(execute)) callInternalFunction(&$$,&$1,&$3); }
+	LABEL '(' function_call_args ')'	{ if(_global(execute)) callInternalFunction(&$$, &$1, &$3); }
 ;
 
 function_call_args:
@@ -185,8 +185,8 @@ function_call_args:
 ;
 
 non_empty_function_call_args:
-		expr							{ passArgument(&$$,&$1,1); }
-	|	function_call_args ',' expr		{ passArgument(&$$,&$3,0); }
+		expr							{ passArgument(&$$, &$1, 1); }
+	|	function_call_args ',' expr		{ passArgument(&$$, &$3, 0); }
 ;
 
 array_values:
@@ -195,8 +195,8 @@ array_values:
 ;
 
 non_empty_array_values:
-		expr					{ passArrayValue(&$$,&$1,1); }
-	|	array_values ',' expr	{ passArrayValue(&$$,&$3,0); }
+		expr					{ passArrayValue(&$$, &$1, 1); }
+	|	array_values ',' expr	{ passArrayValue(&$$, &$3, 0); }
 ;
 
 %%

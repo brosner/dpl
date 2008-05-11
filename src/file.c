@@ -19,12 +19,12 @@
 #include "dpl.h"
 #include "file.h"
 
-void fileOpen(dplVal *result,dplVal *path) {
+void fileOpen(dplVal *result, dplVal *path) {
 	/* create a file pointer to the file at path */
-	FILE_HANDLE(result) = fopen(FILE_PATH(path),"r");
+	FILE_HANDLE(result) = fopen(FILE_PATH(path), "r");
 
 	if(FILE_HANDLE(result) == NULL) {
-		dplError(DPL_WARNINGL,"unable to open file");
+		dplError(DPL_WARNINGL, "unable to open file");
 	}
 }
 
@@ -35,7 +35,7 @@ void fileRead(dplVal *result) {
 	rewind(FILE_HANDLE(result));
 
 	/* read file size */
-	if(!stat(FILE_PATH(result),&file)) {
+	if(!stat(FILE_PATH(result), &file)) {
 		FILE_SIZE(result) = file.st_size;
 	}
 
@@ -44,10 +44,10 @@ void fileRead(dplVal *result) {
 
 	/* sanity check it */
 	if(FILE_DATA(result) == NULL) {
-		dplError(DPL_CORE,"unable allocate enough memory for file");
+		dplError(DPL_CORE, "unable allocate enough memory for file");
 		return;
 	}
 
 	/* read in file */
-	fread(FILE_DATA(result),1,FILE_SIZE(result),FILE_HANDLE(result));
+	fread(FILE_DATA(result), 1, FILE_SIZE(result), FILE_HANDLE(result));
 }

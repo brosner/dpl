@@ -42,7 +42,7 @@ extern FILE *dplSourceFileHandle;
 extern int dplSourceLineNo;
 
 extern void dplLoadModule(dplVal *);
-extern void dplError(int,const char *,...);
+extern void dplError(int, const char *, ...);
 
 typedef union _dplValue {
 	

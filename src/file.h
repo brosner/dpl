@@ -15,7 +15,7 @@
 #ifndef _DPL_FILE_H
 #define _DPL_FILE_H
 
-extern void fileOpen(dplVal *result,dplVal *path);
+extern void fileOpen(dplVal *result, dplVal *path);
 extern void fileRead(dplVal *result);
 
 #endif

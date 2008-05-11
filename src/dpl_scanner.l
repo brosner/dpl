@@ -121,20 +121,20 @@ tokens	[-{}()+*/\[\].=%@;<>,]
 
 {ival} {
 	yylval.type = IS_INT;
-	yylval.value.ival = strtol(yytext,NULL,0);
+	yylval.value.ival = strtol(yytext, NULL, 0);
 	return INT;
 }
 
 {dval} {
 	yylval.type = IS_DOUBLE;
-	yylval.value.dval = strtod(yytext,NULL);
+	yylval.value.dval = strtod(yytext, NULL);
 	return DOUBLE;
 }
 
 "use"{ts}("<"|"\""){ts} {
 	BEGIN(USING);
 	
-	if(strpbrk(yytext,"<") != NULL) return USE_INTERNAL;
+	if(strpbrk(yytext, "<") != NULL) return USE_INTERNAL;
 	else return USE_EXTERNAL;
 }
 
@@ -206,6 +206,6 @@ tokens	[-{}()+*/\[\].=%@;<>,]
 
 (\n)|(\r\n)	{ dplSourceLineNo++; }
 [ \t]+		;
-.			{ dplError(DPL_SYNTAX,"unknown character '%c'",yytext[0]); }
+.			{ dplError(DPL_SYNTAX, "unknown character '%c'", yytext[0]); }
 
 %%
