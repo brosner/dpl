@@ -32,11 +32,11 @@ int arrayExtInit() {
 
 void dpl_printFirstElement(INTERNAL_FUNCTION_PARAMS) {
 	dplVal array;
-	getOneArgument(&array,args);
+	getOneArgument(&array, args);
 
 	/* verify array only */
 	if(array.isArray != TRUE) {
-		dplError(DPL_WARNINGL,"argument to printFirstElement is not an array");
+		dplError(DPL_WARNINGL, "argument to printFirstElement is not an array");
 		return;
 	}
 
@@ -45,7 +45,7 @@ void dpl_printFirstElement(INTERNAL_FUNCTION_PARAMS) {
 	dplVal elementData;
 
 	/* get the first element */
-	arrayElementFetch(&elementData,&array,&e);
+	arrayElementFetch(&elementData, &array, &e);
 
 	/* return value */
 	RETURN_INT(elementData.value.ival);

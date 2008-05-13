@@ -33,23 +33,23 @@ void dplCleanup();
 int main(int argc,char *argv[]) {
 	/* validate cmd line */
 	if(argc < 2) {
-		fprintf(stderr,"dpl: no input file\n");
+		fprintf(stderr, "dpl: no input file\n");
 		exit(1);
 	}
 
 	/* store source filename and read handle to file */
 	dplSourceFileName = argv[1];
 
-	if(strcmp(dplSourceFileName,"stdin") == 0) {
+	if(strcmp(dplSourceFileName, "stdin") == 0) {
 		dplSourceFileHandle = stdin;
 	}
 	else {
-		dplSourceFileHandle = fopen(dplSourceFileName,"r");
+		dplSourceFileHandle = fopen(dplSourceFileName, "r");
 	}
 
 	/* verify fopen */
 	if(!dplSourceFileHandle) {
-		fprintf(stderr,"dpl: cannot open %s\n",dplSourceFileName);
+		fprintf(stderr, "dpl: cannot open %s\n", dplSourceFileName);
 		exit(1);
 	}
 
@@ -67,13 +67,13 @@ int main(int argc,char *argv[]) {
 
 void dplInit() {
 	/* initialize the variable symbol table */
-	if(dplHashInit(&_global(vst),50,DPLVAL_DESTROY) == FAILURE) {
-		dplError(DPL_CORE,"unable to initialize variable symbol table.");
+	if(dplHashInit(&_global(vst), 50, DPLVAL_DESTROY) == FAILURE) {
+		dplError(DPL_CORE, "unable to initialize variable symbol table.");
 	}
 
 	/* initialize the function symbol table */
-	if(dplHashInit(&_global(fst),50,NULL) == FAILURE) {
-		dplError(DPL_CORE,"unable to initialize module hash table.");
+	if(dplHashInit(&_global(fst), 50, NULL) == FAILURE) {
+		dplError(DPL_CORE, "unable to initialize module hash table.");
 	}
 }
 
@@ -83,48 +83,48 @@ void dplCleanup() {
 	dplHashDestroy(&_global(fst));
 
 	/* destroy css */
-	//stackDestroy(&_global(css));
+	// stackDestroy(&_global(css));
 }
 
 void dplLoadModule(dplVal *module) {
 	char *moduleName = module->value.str.val;
 
-	if(strcmp(moduleName,"simple") == 0) {
+	if(strcmp(moduleName, "simple") == 0) {
 		mathInit();
 		stringInit();
 		arrayExtInit();
 	}
-	else if(strcmp(moduleName,"math") == 0) {
+	else if(strcmp(moduleName, "math") == 0) {
 		mathInit();
 	}
-	else if(strcmp(moduleName,"string") == 0) {
+	else if(strcmp(moduleName, "string") == 0) {
 		stringInit();
 	}
-	else if(strcmp(moduleName,"array") == 0) {
+	else if(strcmp(moduleName, "array") == 0) {
 		arrayExtInit();
 	}
 	else {
-		dplError(DPL_WARNINGL,"unknown internal module");
+		dplError(DPL_WARNINGL, "unknown internal module");
 	}
 }
 
-void dplError(int errcode,const char *txt,...) {
+void dplError(int errcode, const char *txt, ...) {
 	va_list args;
 	char buffer[1024];
 
 	va_start(args,txt);
-	(void) vsnprintf(buffer,sizeof(buffer) - 1,txt,args);
+	(void) vsnprintf(buffer, sizeof(buffer) - 1, txt, args);
 	va_end(args);
 
 	switch(errcode) {
 		case DPL_CORE:
-			printf("[dpl core error]: %s\n",buffer);
+			printf("[dpl core error]: %s\n", buffer);
 		break;
 		case DPL_WARNINGL:
-			printf("[dpl warning on line %d]: %s\n",dplSourceLineNo,buffer);
+			printf("[dpl warning on line %d]: %s\n", dplSourceLineNo, buffer);
 		break;
 		case DPL_SYNTAX:
-			printf("[dpl syntax error on line %d]: %s\n",dplSourceLineNo,buffer);
+			printf("[dpl syntax error on line %d]: %s\n", dplSourceLineNo, buffer);
 		break;
 	}
 }

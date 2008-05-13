@@ -47,21 +47,21 @@ typedef struct _HashTable {
 
 } HashTable;
 
-extern int dplHashInit(HashTable *ht,int size,void (*destory)(void *data));
+extern int dplHashInit(HashTable *ht, int size, void (*destory)(void *data));
 extern void dplHashDestroy(HashTable *ht);
 
-extern int dplHashCopy(HashTable **target,HashTable *source,void (*cc) (void *data),void *tmp,int size);
+extern int dplHashCopy(HashTable **target, HashTable *source, void (*cc)(void *data), void *tmp, int size);
 
-extern int dplHashAddElement(HashTable *ht,char *key,int keyLen,void *data,int dataSize);
-extern int dplHashUpdateElement(HashTable *ht,char *key,int keyLen,void *data,int dataSize);
-extern int dplHashFind(HashTable *ht,char *key,int keyLen,void **data);
-//extern int dpl_hash_del_element(HashTable *ht,char *key,int keyLen);
+extern int dplHashAddElement(HashTable *ht, char *key, int keyLen, void *data, int dataSize);
+extern int dplHashUpdateElement(HashTable *ht, char *key, int keyLen, void *data, int dataSize);
+extern int dplHashFind(HashTable *ht, char *key, int keyLen, void **data);
+// extern int dpl_hash_del_element(HashTable *ht, char *key,int keyLen);
 
-extern int dplHashAddIndexElement(HashTable *ht,unsigned int i,void *data,int dataSize);
-extern int dplHashUpdateIndexElement(HashTable *ht,unsigned int i,void *data,int dataSize);
-extern int dplHashIndexFind(HashTable *ht,unsigned int i,void **data);
+extern int dplHashAddIndexElement(HashTable *ht, unsigned int i, void *data, int dataSize);
+extern int dplHashUpdateIndexElement(HashTable *ht, unsigned int i, void *data, int dataSize);
+extern int dplHashIndexFind(HashTable *ht, unsigned int i, void **data);
 
-extern void dplHashIndexDump(HashTable *ht,int fromInsert);
+extern void dplHashIndexDump(HashTable *ht, int fromInsert);
 extern void dplHashDump(HashTable *ht);
 
 #endif

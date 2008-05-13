@@ -18,11 +18,11 @@
 #include "dpl.h"
 #include "variables.h"
 
-void variableInit(dplVal *type,dplVal *varName) {
+void variableInit(dplVal *type, dplVal *varName) {
 	dplVal tmp;
 
-	if(variableFetch(&tmp,varName) == SUCCESS) {
-		dplError(DPL_WARNINGL,"variable %s is already declared.",STR_VALUE(varName));
+	if(variableFetch(&tmp, varName) == SUCCESS) {
+		dplError(DPL_WARNINGL, "variable %s is already declared.", STR_VALUE(varName));
 		return;
 	}
 
@@ -54,8 +54,8 @@ void variableInit(dplVal *type,dplVal *varName) {
 #endif
 
 		/* initialize array ht */
-		if(dplHashInit(var.value.array.elements,50,DPLVAL_DESTROY) == FAILURE) {
-			dplError(DPL_CORE,"unable to init array hash table");
+		if(dplHashInit(var.value.array.elements, 50, DPLVAL_DESTROY) == FAILURE) {
+			dplError(DPL_CORE, "unable to init array hash table");
 		}
 	}
 	else {
@@ -73,16 +73,16 @@ void variableInit(dplVal *type,dplVal *varName) {
 	}
 
 	/* add to vst */
-	if(dplHashAddElement(&_global(vst),STR_VALUE(varName),STR_LEN(varName) + 1,&var,sizeof(dplVal)) == FAILURE) {
-		dplError(DPL_CORE,"cannot add %s to vst.",STR_VALUE(varName));
+	if(dplHashAddElement(&_global(vst), STR_VALUE(varName), STR_LEN(varName) + 1, &var, sizeof(dplVal)) == FAILURE) {
+		dplError(DPL_CORE, "cannot add %s to vst.", STR_VALUE(varName));
 	}
 }
 
-void variableAssign(dplVal *varName,dplVal *value) {
+void variableAssign(dplVal *varName, dplVal *value) {
 	dplVal tmp;
 
-	if(variableFetch(&tmp,varName) == FAILURE) {
-		dplError(DPL_WARNINGL,"assignment to undefined variable %s",STR_VALUE(varName));
+	if(variableFetch(&tmp, varName) == FAILURE) {
+		dplError(DPL_WARNINGL, "assignment to undefined variable %s", STR_VALUE(varName));
 		return;
 	}
 
@@ -97,7 +97,7 @@ void variableAssign(dplVal *varName,dplVal *value) {
 	}
 	else {
 		if(var.type != tmp.type) {
-			dplError(DPL_WARNINGL,"assignment of incompatible types");
+			dplError(DPL_WARNINGL, "assignment of incompatible types");
 			return;
 		}
 
@@ -122,23 +122,23 @@ void variableAssign(dplVal *varName,dplVal *value) {
 		}
 	}
 
-	if(dplHashUpdateElement(&_global(vst),STR_VALUE(varName),STR_LEN(varName) + 1,&var,sizeof(dplVal)) == FAILURE) {
-		dplError(DPL_CORE,"unable to update value of %s",STR_VALUE(varName));
+	if(dplHashUpdateElement(&_global(vst), STR_VALUE(varName), STR_LEN(varName) + 1, &var, sizeof(dplVal)) == FAILURE) {
+		dplError(DPL_CORE, "unable to update value of %s", STR_VALUE(varName));
 		return;
 	}
 }
 
-void variableCreate(dplVal *type,dplVal *varName,dplVal *value) {
-	variableInit(type,varName);
-	variableAssign(varName,value);
+void variableCreate(dplVal *type, dplVal *varName, dplVal *value) {
+	variableInit(type, varName);
+	variableAssign(varName, value);
 }
 
-int variableFetch(dplVal *result,dplVal *varName) {
+int variableFetch(dplVal *result, dplVal *varName) {
 	dplVal *data;
 
-	//printf("fetching %s\n",varName->value.str.val);
+	// printf("fetching %s\n", varName->value.str.val);
 
-	if(dplHashFind(&_global(vst),STR_VALUE(varName),STR_LEN(varName) + 1,(void **) &data) == SUCCESS) {
+	if(dplHashFind(&_global(vst), STR_VALUE(varName), STR_LEN(varName) + 1, (void **) &data) == SUCCESS) {
 		*result = *data;
 		return dplValCopy(result);
 	}

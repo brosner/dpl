@@ -15,10 +15,10 @@
 #ifndef _DPL_VARIABLES_H
 #define _DPL_VARIABLES_H
 
-extern void variableInit(dplVal *type,dplVal *varName);
-extern void variableAssign(dplVal *varName,dplVal *value);
-extern void variableCreate(dplVal *type,dplVal *varName,dplVal *value);
+extern void variableInit(dplVal *type, dplVal *varName);
+extern void variableAssign(dplVal *varName, dplVal *value);
+extern void variableCreate(dplVal *type, dplVal *varName, dplVal *value);
 
-extern int variableFetch(dplVal *result,dplVal *varName);
+extern int variableFetch(dplVal *result, dplVal *varName);
 
 #endif

@@ -31,17 +31,17 @@ int stringInit() {
 void dpl_strlen(INTERNAL_FUNCTION_PARAMS) {
 	/* validate arguments */
 	if(getNumArguments < 1) {
-		dplError(DPL_WARNINGL,"argument 1 to strlen is missing");
+		dplError(DPL_WARNINGL, "argument 1 to strlen is missing");
 		return;
 	}
 
 	/* fetch the argument */
 	dplVal str;
-	getArgument(&str,args,0);
+	getArgument(&str, args,0);
 
 	/* validate the type */
 	if(str.type != IS_STRING) {
-		dplError(DPL_WARNINGL,"invalid data type in argument 1 to strlen");
+		dplError(DPL_WARNINGL, "invalid data type in argument 1 to strlen");
 	}
 
 	RETURN_INT(str.value.str.len);

@@ -18,9 +18,9 @@
 #include "dpl.h"
 #include "operators.h"
 
-void opAdd(dplVal *result,dplVal *op1,dplVal *op2) {
+void opAdd(dplVal *result, dplVal *op1, dplVal *op2) {
 	if(!(op1->type & IS_NUMBER)) {
-		dplError(DPL_WARNINGL,"cannot add a non number");
+		dplError(DPL_WARNINGL, "cannot add a non number");
 		return;
 	}
 
@@ -35,9 +35,9 @@ void opAdd(dplVal *result,dplVal *op1,dplVal *op2) {
 	}
 }
 
-void opSub(dplVal *result,dplVal *op1,dplVal *op2) {
+void opSub(dplVal *result, dplVal *op1, dplVal *op2) {
 	if(!(op1->type & IS_NUMBER)) {
-		dplError(DPL_WARNINGL,"cannot subtract a non number");
+		dplError(DPL_WARNINGL, "cannot subtract a non number");
 		return;
 	}
 
@@ -45,9 +45,9 @@ void opSub(dplVal *result,dplVal *op1,dplVal *op2) {
 	result->value.ival = op1->value.ival - op2->value.ival;
 }
 
-void opMul(dplVal *result,dplVal *op1,dplVal *op2) {
+void opMul(dplVal *result, dplVal *op1, dplVal *op2) {
 	if(!(op1->type & IS_NUMBER)) {
-		dplError(DPL_WARNINGL,"cannot multiply a non number");
+		dplError(DPL_WARNINGL, "cannot multiply a non number");
 		return;
 	}
 
@@ -55,7 +55,7 @@ void opMul(dplVal *result,dplVal *op1,dplVal *op2) {
 	result->value.ival = op1->value.ival * op2->value.ival;
 }
 
-void opDiv(dplVal *result,dplVal *op1,dplVal *op2) {
+void opDiv(dplVal *result, dplVal *op1, dplVal *op2) {
 	if(!(op1->type & IS_NUMBER)) {
 		dplError(DPL_WARNINGL,"cannot divide a non number");
 		return;
@@ -70,9 +70,9 @@ void opDiv(dplVal *result,dplVal *op1,dplVal *op2) {
 	result->value.ival = op1->value.ival / op2->value.ival;
 }
 
-void opPow(dplVal *result,dplVal *op1,dplVal *op2) {
+void opPow(dplVal *result, dplVal *op1, dplVal *op2) {
 	if(!(op1->type & IS_NUMBER)) {
-		dplError(DPL_WARNINGL,"cannot power up a non number");
+		dplError(DPL_WARNINGL, "cannot power up a non number");
 		return;
 	}
 
@@ -86,10 +86,10 @@ void opPow(dplVal *result,dplVal *op1,dplVal *op2) {
 	}
 }
 
-void opConcat(dplVal *result,dplVal *str1,dplVal *str2) {
+void opConcat(dplVal *result, dplVal *str1, dplVal *str2) {
 	/* sanity check */
 	if(str1->type != IS_STRING || str2->type != IS_STRING) {
-		dplError(DPL_WARNINGL,"cannot concat a non-string.");
+		dplError(DPL_WARNINGL, "cannot concat a non-string.");
 		return;
 	}
 
@@ -97,7 +97,7 @@ void opConcat(dplVal *result,dplVal *str1,dplVal *str2) {
 	result->value.str.len = str1->value.str.len + str2->value.str.len;
 
 	/* concat op */
-	strncat(result->value.str.val,str2->value.str.val,str2->value.str.len);
+	strncat(result->value.str.val, str2->value.str.val, str2->value.str.len);
 }
 
 int dplValExprTrue(dplVal *expr) {
@@ -119,7 +119,7 @@ int dplValExprTrue(dplVal *expr) {
 	return FALSE;
 }
 
-int compareDplVal(dplVal *result,dplVal *op1,dplVal *op2) {
+int compareDplVal(dplVal *result, dplVal *op1, dplVal *op2) {
 	result->type = IS_BOOL;
 
 	if(op1->type == IS_INT && op2->type == IS_INT) {
@@ -147,7 +147,7 @@ int compareDplVal(dplVal *result,dplVal *op1,dplVal *op2) {
 		}
 	}
 	else if(op1->type == IS_STRING && op2->type == IS_STRING) {
-		if(strcmp(op1->value.str.val,op2->value.str.val) == 0) {
+		if(strcmp(op1->value.str.val, op2->value.str.val) == 0) {
 			result->value.boolval = TRUE;
 		}
 		else {
@@ -155,7 +155,7 @@ int compareDplVal(dplVal *result,dplVal *op1,dplVal *op2) {
 		}
 	}
 	else {
-		dplError(DPL_WARNINGL,"comparsion types are not compatible");
+		dplError(DPL_WARNINGL, "comparsion types are not compatible");
 	}
 
 	/*if((op1->type & IS_NOT_BOOL) && op2->type == IS_NULL) {
@@ -163,12 +163,12 @@ int compareDplVal(dplVal *result,dplVal *op1,dplVal *op2) {
 	}*/
 }
 
-void isEqualFunc(dplVal *result,dplVal *op1,dplVal *op2) {
-	compareDplVal(result,op1,op2);
+void isEqualFunc(dplVal *result, dplVal *op1, dplVal *op2) {
+	compareDplVal(result, op1, op2);
 }
 
-void isNotEqualFunc(dplVal *result,dplVal *op1,dplVal *op2) {
-	compareDplVal(result,op1,op2);
+void isNotEqualFunc(dplVal *result, dplVal *op1, dplVal *op2) {
+	compareDplVal(result, op1, op2);
 
 	if(result->value.boolval == FALSE) {
 		result->value.boolval = TRUE;
@@ -178,7 +178,7 @@ void isNotEqualFunc(dplVal *result,dplVal *op1,dplVal *op2) {
 	}
 }
 
-void isGreaterThanFunc(dplVal *result,dplVal *op1,dplVal *op2) {
+void isGreaterThanFunc(dplVal *result, dplVal *op1, dplVal *op2) {
 	result->type = IS_BOOL;
 
 	if(op1->type == IS_INT && op2->type == IS_INT) {
@@ -191,7 +191,7 @@ void isGreaterThanFunc(dplVal *result,dplVal *op1,dplVal *op2) {
 	}
 }
 
-void isLessThanFunc(dplVal *result,dplVal *op1,dplVal *op2) {
+void isLessThanFunc(dplVal *result, dplVal *op1, dplVal *op2) {
 	result->type = IS_BOOL;
 
 	if(op1->type == IS_INT && op2->type == IS_INT) {

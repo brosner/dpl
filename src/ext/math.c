@@ -37,11 +37,11 @@ int mathInit() {
 
 void dpl_abs(INTERNAL_FUNCTION_PARAMS) {
 	dplVal number;
-	getOneArgument(&number,args);
+	getOneArgument(&number, args);
 
 	/* verify int only */
 	if(number.type != IS_INT) {
-		dplError(DPL_WARNINGL,"argument to abs is not an int");
+		dplError(DPL_WARNINGL, "argument to abs is not an int");
 		return;
 	}
 
@@ -50,11 +50,11 @@ void dpl_abs(INTERNAL_FUNCTION_PARAMS) {
 
 void dpl_acos(INTERNAL_FUNCTION_PARAMS) {
 	dplVal number;
-	getOneArgument(&number,args);
+	getOneArgument(&number, args);
 
 	/* verify double only */
 	if(number.type != IS_DOUBLE) {
-		dplError(DPL_WARNINGL,"argument to acos is not a double");
+		dplError(DPL_WARNINGL, "argument to acos is not a double");
 		return;
 	}
 
@@ -63,11 +63,11 @@ void dpl_acos(INTERNAL_FUNCTION_PARAMS) {
 
 void dpl_cos(INTERNAL_FUNCTION_PARAMS) {
 	dplVal number;
-	getOneArgument(&number,args);
+	getOneArgument(&number, args);
 
 	/* verify double only */
 	if(number.type != IS_DOUBLE) {
-		dplError(DPL_WARNINGL,"argument to cos is not a double");
+		dplError(DPL_WARNINGL, "argument to cos is not a double");
 		return;
 	}
 
@@ -76,11 +76,11 @@ void dpl_cos(INTERNAL_FUNCTION_PARAMS) {
 
 void dpl_sin(INTERNAL_FUNCTION_PARAMS) {
 	dplVal number;
-	getOneArgument(&number,args);
+	getOneArgument(&number, args);
 
 	/* verify double only */
 	if(number.type != IS_DOUBLE) {
-		dplError(DPL_WARNINGL,"argument to sin is not a double");
+		dplError(DPL_WARNINGL, "argument to sin is not a double");
 		return;
 	}
 
@@ -89,11 +89,11 @@ void dpl_sin(INTERNAL_FUNCTION_PARAMS) {
 
 void dpl_tan(INTERNAL_FUNCTION_PARAMS) {
 	dplVal number;
-	getOneArgument(&number,args);
+	getOneArgument(&number, args);
 
 	/* verify double only */
 	if(number.type != IS_DOUBLE) {
-		dplError(DPL_WARNINGL,"argument to tan is not a double");
+		dplError(DPL_WARNINGL, "argument to tan is not a double");
 		return;
 	}
 
@@ -102,11 +102,11 @@ void dpl_tan(INTERNAL_FUNCTION_PARAMS) {
 
 void dpl_deg2rad(INTERNAL_FUNCTION_PARAMS) {
 	dplVal number;
-	getOneArgument(&number,args);
+	getOneArgument(&number, args);
 
 	/* verify int only */
 	if(number.type != IS_INT) {
-		dplError(DPL_WARNINGL,"argument to deg2rad is not an int");
+		dplError(DPL_WARNINGL, "argument to deg2rad is not an int");
 		return;
 	}
 

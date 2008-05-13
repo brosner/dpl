@@ -26,7 +26,7 @@ void stackInit(Stack *stack) {
 void stackDestroy(Stack *stack) {
 }
 
-int stackPush(Stack *stack,void *data,int size) {
+int stackPush(Stack *stack, void *data, int size) {
 	StackElement *element;
 
 	/* allocate memory for element */
@@ -38,7 +38,7 @@ int stackPush(Stack *stack,void *data,int size) {
 
 	/* allocate memory for data and store it */
 	element->data = (void *) malloc(size);
-	memcpy(element->data,data,size);
+	memcpy(element->data, data, size);
 
 	if(stackSize(stack) == 0) {
 		stack->tail = element;
@@ -53,7 +53,7 @@ int stackPush(Stack *stack,void *data,int size) {
 	return SUCCESS;
 }
 
-int stackPop(Stack *stack,void **data) {
+int stackPop(Stack *stack, void **data) {
 	StackElement *element;
 
 	/* dont allow removal from empty list */

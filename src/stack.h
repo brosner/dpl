@@ -33,8 +33,8 @@ typedef struct _Stack {
 extern void stackInit(Stack *stack);
 extern void stackDestroy(Stack *stack);
 
-extern int stackPush(Stack *stack,void *data,int size);
-extern int stackPop(Stack *stack,void **data);
+extern int stackPush(Stack *stack, void *data, int size);
+extern int stackPop(Stack *stack, void **data);
 
 #define stackPeek(stack) ((stack)->head == NULL ? NULL : (stack)->head->data)
 #define stackSize(stack) (stack)->size
