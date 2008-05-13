@@ -23,19 +23,61 @@ SRCS		= $(LEXOUT) $(YACCOUT) main.c variables.c
 OBJS		= hash.o stack.o dpl_api.o dpl_scanner.o dpl_parser.o main.o variables.o arrays.o functions.o operators.o control_structs.o file.o
 EXT_OBJS	= string.o math.o array.o
 
-all: dpl clean
+all: dpl
 
-dpl:
+dpl_scanner.c:
 	$(LEXER) -o$(LEXOUT) $(LEXFILE)
+
+dpl_parser.c:
 	$(YACC) -y -d -o $(YACCOUT) $(YACCFILE)
+
+hash.o:
+	$(CC) -c $(SRC)/hash.c -o $(SRC)/hash.o
+
+stack.o:
+	$(CC) -c $(SRC)/stack.c -o $(SRC)/stack.o
+
+dpl_api.o:
+	$(CC) -c $(SRC)/dpl_api.c -o $(SRC)/dpl_api.o
+
+dpl_scanner.o: dpl_scanner.c
+	$(CC) -c $(SRC)/dpl_scanner.c -o $(SRC)/dpl_scanner.o
+
+dpl_parser.o: dpl_parser.c
+	$(CC) -c $(SRC)/dpl_parser.c -o $(SRC)/dpl_parser.o
+
+main.o:
+	$(CC) -c $(SRC)/main.c -o $(SRC)/main.o
+
+variables.o:
+	$(CC) -c $(SRC)/variables.c -o $(SRC)/variables.o
+
+arrays.o:
+	$(CC) -c $(SRC)/arrays.c -o $(SRC)/arrays.o
+
+functions.o:
+	$(CC) -c $(SRC)/functions.c -o $(SRC)/functions.o
+
+operators.o:
+	$(CC) -c $(SRC)/operators.c -o $(SRC)/operators.o
+
+control_structs.o:
+	$(CC) -c $(SRC)/control_structs.c -o $(SRC)/control_structs.o
+
+file.o:
+	$(CC) -c $(SRC)/file.c -o $(SRC)/file.o
+
+dpl: hash.o stack.o dpl_api.o dpl_scanner.o dpl_parser.o main.o variables.o arrays.o functions.o operators.o control_structs.o file.o
 	
-	# compile core source
-	$(CC) -ggdb -c $(SRC)/*.c
-
-	# compile ext source
 	$(CC) -c -I$(SRC) $(EXT)/*.c
-
-	$(CC) -ggdb -o $(PROG) $(OBJS) $(EXT_OBJS)
+	
+	$(CC) -o $(PROG) $(SRC)/hash.o $(SRC)/stack.o $(SRC)/dpl_api.o \
+		$(SRC)/dpl_scanner.o $(SRC)/dpl_parser.o $(SRC)/main.o \
+		$(SRC)/variables.o $(SRC)/arrays.o $(SRC)/functions.o \
+		$(SRC)/operators.o $(SRC)/control_structs.o $(SRC)/file.o \
+		string.o math.o array.o
 
 clean:
-	rm -f ./*.o
+	rm -f *.o
+	rm -f $(PROG) $(LEXOUT) $(YACCOUT)
+	
