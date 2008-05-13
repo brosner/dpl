@@ -13,6 +13,7 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 
 #include "dpl.h"
 #include "functions.h"
